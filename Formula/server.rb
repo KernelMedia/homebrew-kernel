@@ -36,7 +36,14 @@ class Server < Formula
                            # not the Cellar path holding the bundled binaries,
                            # point it at the installed copy explicitly.
                            KERNEL_FFMPEG: opt_prefix/"binaries/ffmpeg",
-                           KERNEL_FFPROBE: opt_prefix/"binaries/ffprobe"
+                           KERNEL_FFPROBE: opt_prefix/"binaries/ffprobe",
+                           # Any non-empty value disables the in-app self-updater
+                           # (same check apt/yum packages use via their own
+                           # KERNEL_MANAGED=apt/yum). Without this, Settings >
+                           # Updates would try to swap the binary in place inside
+                           # the Cellar, which `brew upgrade` doesn't know about
+                           # and would leave the install in a broken state.
+                           KERNEL_MANAGED: "brew"
     working_dir var/"kernel-server"
     log_path var/"log/kernel-server.log"
     error_log_path var/"log/kernel-server.log"

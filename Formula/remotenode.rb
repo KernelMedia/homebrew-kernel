@@ -45,6 +45,9 @@ class Remotenode < Formula
 
   service do
     run [opt_bin/"kernel-transcoder", "-config", etc/"kernel-remotenode/config.yml"]
+    # Any non-empty value disables the transcoder's own self-updater, same
+    # check kernelmediaservernode's apt/yum packages rely on.
+    environment_variables KERNEL_MANAGED: "brew"
     working_dir var/"kernel-remotenode"
     log_path var/"log/kernel-remotenode.log"
     error_log_path var/"log/kernel-remotenode.log"
