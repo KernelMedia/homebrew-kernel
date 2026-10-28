@@ -1,17 +1,17 @@
 class Server < Formula
   desc "Self-hosted media server for Live TV, movies, and TV shows"
   homepage "https://kernelmedia.tv"
-  version "0.8.20"
+  version "0.9.0"
   license "BSL-1.1"
 
   on_arm do
     url "https://api.kernelmedia.tv/downloads/public/free/darwin-arm64"
-    sha256 "b49ae7e20638b69d0ffe854bf74fdf9008b21ce38d3564bfc6dd0e3aa75a0d93"
+    sha256 "c9907294f5645bd0dcc404ae60b376d1832ddd2882686b7a729a2241c7586d2a"
   end
 
   on_intel do
     url "https://api.kernelmedia.tv/downloads/public/free/darwin-amd64"
-    sha256 "3a7f64b6a2f0ab8a2a6d1390235adccc6265b47524ba9998e76b6eb5624bf864"
+    sha256 "7fc92aa8f634fcb3d642a32a9dd7a595237ed886043786640916d24760dd7de4"
   end
 
   def install
