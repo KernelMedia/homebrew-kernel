@@ -6,12 +6,12 @@ class Server < Formula
 
   on_arm do
     url "https://api.kernelmedia.tv/downloads/public/free/darwin-arm64"
-    sha256 "e4abb1db5d9e617b8a803a97fbc86151b2b5dc27ecc815d2e691296faf1dd443"
+    sha256 "fb5a1dda7df095adb8827f31532759458af16634e6a75dba006592fb956c9dc4"
   end
 
   on_intel do
     url "https://api.kernelmedia.tv/downloads/public/free/darwin-amd64"
-    sha256 "8ea174ee67fccc9d633778fde723e4806101500a12f4d30434f3ba05d707670b"
+    sha256 "299363858fb21978cc2335063ad1d9ce53b92bd1862255556affdb5a01737032"
   end
 
   def install
