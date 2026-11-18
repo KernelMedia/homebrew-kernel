@@ -1,17 +1,17 @@
 class Remotenode < Formula
   desc "Remote transcoder node for Kernel Media Server"
   homepage "https://kernelmedia.tv"
-  version "0.9.3"
+  version "0.9.4"
   license "BSL-1.1"
 
   on_arm do
     url "https://api.kernelmedia.tv/downloads/public/free/darwin-arm64"
-    sha256 "2bcfa936e5b1ae12c461970cd86512547688052f7bc4156aac3e628851fcaf70"
+    sha256 "f74427d998caccd433bc5fb14455fe3e9db9c086fe99f150e9b899eb24f147d1"
   end
 
   on_intel do
     url "https://api.kernelmedia.tv/downloads/public/free/darwin-amd64"
-    sha256 "58b0067bb0b260282cd63d60f78d83b3aa35aa96bb0cd12539719cde4d2b6fd3"
+    sha256 "16649db8f5ee42bd978c5eba7a77de2da3c2dc325a9b91f3c4de114a94f40329"
   end
 
   def install
