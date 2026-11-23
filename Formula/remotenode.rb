@@ -15,7 +15,7 @@ class Remotenode < Formula
   end
 
   def install
-    # Same combined archive the `server` formula uses (and the .deb/.rpm
+    # Same combined archive the `kernelmediaserver` formula uses (and the .deb/.rpm
     # packages are built from) -- this formula just takes the transcoder
     # binary and the bundled ffmpeg instead of the server binary.
     platform_dir = Dir.glob("*").select { |f| File.directory?(f) }.first

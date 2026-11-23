@@ -1,27 +1,30 @@
-class KernelServer < Formula
+class Kernelmediaserver < Formula
   desc "Self-hosted media server for Live TV, movies, and TV shows"
   homepage "https://kernelmedia.tv"
-  version "0.9.1"
+  version "0.9.4"
   license "BSL-1.1"
 
   on_arm do
     url "https://api.kernelmedia.tv/downloads/public/free/darwin-arm64"
-    sha256 "REPLACE_WITH_DARWIN_ARM64_SHA256"
+    sha256 "f74427d998caccd433bc5fb14455fe3e9db9c086fe99f150e9b899eb24f147d1"
   end
 
   on_intel do
     url "https://api.kernelmedia.tv/downloads/public/free/darwin-amd64"
-    sha256 "REPLACE_WITH_DARWIN_AMD64_SHA256"
+    sha256 "16649db8f5ee42bd978c5eba7a77de2da3c2dc325a9b91f3c4de114a94f40329"
   end
 
   def install
     # Archive layout is a top-level <platform>/ dir containing the server
-    # binary, the transcoder binary, and binaries/ (bundled jellyfin-ffmpeg).
+    # binary (named `kernel`), the transcoder binary (`kernel-transcoder`,
+    # installed by the separate `remotenode` formula), and binaries/ (bundled
+    # jellyfin-ffmpeg) -- same combined zip the .deb/.rpm packages are built
+    # from. This formula only needs the server binary + ffmpeg.
     platform_dir = Dir.glob("*").select { |f| File.directory?(f) }.first
-    prefix.install Dir["#{platform_dir}/*"]
+    prefix.install "#{platform_dir}/kernel" => "kernel-server"
+    prefix.install "#{platform_dir}/binaries"
 
     bin.install_symlink prefix/"kernel-server"
-    bin.install_symlink prefix/"kernel-transcoder" if (prefix/"kernel-transcoder").exist?
   end
 
   service do
@@ -33,7 +36,14 @@ class KernelServer < Formula
                            # not the Cellar path holding the bundled binaries,
                            # point it at the installed copy explicitly.
                            KERNEL_FFMPEG: opt_prefix/"binaries/ffmpeg",
-                           KERNEL_FFPROBE: opt_prefix/"binaries/ffprobe"
+                           KERNEL_FFPROBE: opt_prefix/"binaries/ffprobe",
+                           # Any non-empty value disables the in-app self-updater
+                           # (same check apt/yum packages use via their own
+                           # KERNEL_MANAGED=apt/yum). Without this, Settings >
+                           # Updates would try to swap the binary in place inside
+                           # the Cellar, which `brew upgrade` doesn't know about
+                           # and would leave the install in a broken state.
+                           KERNEL_MANAGED: "brew"
     working_dir var/"kernel-server"
     log_path var/"log/kernel-server.log"
     error_log_path var/"log/kernel-server.log"
