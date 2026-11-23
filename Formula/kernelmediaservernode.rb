@@ -17,10 +17,10 @@ class Kernelmediaservernode < Formula
   def install
     # Same combined archive the `kernelmediaserver` formula uses (and the .deb/.rpm
     # packages are built from) -- this formula just takes the transcoder
-    # binary and the bundled ffmpeg instead of the server binary.
-    platform_dir = Dir.glob("*").select { |f| File.directory?(f) }.first
-    prefix.install "#{platform_dir}/kernel-transcoder"
-    prefix.install "#{platform_dir}/binaries"
+    # binary and the bundled ffmpeg instead of the server binary. brew strips
+    # the archive's single top-level <platform>/ dir, so these are at the root.
+    prefix.install "kernel-transcoder"
+    prefix.install "binaries"
 
     bin.install_symlink prefix/"kernel-transcoder"
 

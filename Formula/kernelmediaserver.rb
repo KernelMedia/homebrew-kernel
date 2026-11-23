@@ -15,14 +15,14 @@ class Kernelmediaserver < Formula
   end
 
   def install
-    # Archive layout is a top-level <platform>/ dir containing the server
+    # Archive layout is a single top-level <platform>/ dir, which brew strips
+    # on unpack, so we're already inside it here. It holds the server
     # binary (named `kernel`), the transcoder binary (`kernel-transcoder`,
     # installed by the separate `kernelmediaservernode` formula), and binaries/ (bundled
     # jellyfin-ffmpeg) -- same combined zip the .deb/.rpm packages are built
     # from. This formula only needs the server binary + ffmpeg.
-    platform_dir = Dir.glob("*").select { |f| File.directory?(f) }.first
-    prefix.install "#{platform_dir}/kernel" => "kernel-server"
-    prefix.install "#{platform_dir}/binaries"
+    prefix.install "kernel" => "kernel-server"
+    prefix.install "binaries"
 
     bin.install_symlink prefix/"kernel-server"
   end
