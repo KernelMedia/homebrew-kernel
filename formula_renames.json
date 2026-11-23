@@ -1,4 +1,5 @@
 {
   "server": "kernelmediaserver",
-  "kernel-server": "kernelmediaserver"
+  "kernel-server": "kernelmediaserver",
+  "remotenode": "kernelmediaservernode"
 }

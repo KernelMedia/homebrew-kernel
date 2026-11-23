@@ -1,4 +1,4 @@
-class Remotenode < Formula
+class Kernelmediaservernode < Formula
   desc "Remote transcoder node for Kernel Media Server"
   homepage "https://kernelmedia.tv"
   version "0.9.4"
